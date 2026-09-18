@@ -19,7 +19,8 @@
       background-color: white;
       padding: 30px; 
       width: 550px;
-      height: 570px;
+      min-height: 570px;
+      height: auto;
       font-family: "Karla", sans-serif;}
 
     .primeiroQuadrante{ display: flex;
@@ -108,7 +109,7 @@
       flex-wrap: nowrap;
       gap: 7px;
       margin: 0;
-      padding: 2px 15px;
+      padding: 12px 15px;
       border: 1px solid  hsl(187, 24%, 22%);
       border-radius: 5px;
       color: black;
@@ -119,6 +120,11 @@
       width: 100%;
     }
 
+    .checkboxOption input[type="radio"]{
+      margin: 0;
+      display: block;
+    }
+
     .checkBox{
       gap: 20px;
       margin-top: 10px;
@@ -127,81 +133,245 @@
 
     #ultimoId{
       display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-top: 20px;
+      flex-direction: column;
+      margin-top: 25px;
+      margin-bottom: 10px;
     }
 
     #ultimoId input{
       height: 20px;
     }
 
+    #ultimoId input[type="checkbox"]{
+      margin: 0;
+      display: block;
+    }
+
+    #ultimoCheck{
+      display: flex;
+      gap: 20px;
+    }
+
     .checkboxError{
-      color: red;
       display: none;
-      margin-top: 6px;
+      color: red;
+      margin-top: 10px;
     }
     
+
+
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #999;
+      border-radius: 50%;
+    }
+
+    input[type="radio"]:checked{
+      background-image: url('assets/images/icon-radio-selected.svg');
+      width: 17px;
+      height: 17px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-color: transparent;
+    }
+
+    .sucessMessage{
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #2A4244;
+      border-radius: 15px;
+      color: white;
+      font-family: "Karla", sans-serif;
+    }
+
+    .sucessMessage h4{
+      font-weight: 600;
+    }
+
+    .sucessMessage img{
+      height: 17px;
+      width: 17px;
+      margin-right: 10px;
+    }
+
+    @media(max-width:375px){
+      .main{
+        width: 300px;
+        height: 850px;
+      }
+      .primeiroQuadrante{
+        flex-direction: column;
+      }
+
+      .checkBox{
+        flex-direction: column;
+      }
+
+      #campoEmail{
+        width: 89%;
+      }
+
+      #campoTexto{
+        width: 98%;
+        height: 200px;
+      }
+
+      .primeiroQuadrado{
+        width: 102%;
+      }
+      
+    }
+    
+    
+
 
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="sucessMessage" style="display: none;">
+      <h4><img src="assets/images/icon-success-check.svg" alt="">Message Sent!</h4>
+      <p>Thanks for completing the form. We´ll be in touch soon!</p>
+    </div>
      <div class="main">
-      <form action="">
+      <form id="cadastroForm">
       <h2>Contact Us</h2>
       <div class="primeiroQuadrante">
         <div class="primeiroQuadrado">
           <label for="" class="labelGeral">First Name *</label><br>
           <input type="text" class="quadrado" id="inputPrimeiroNome">
-          <span class="checkboxError"></span>
+          <span class="checkboxError" id="errorLabel">This field is required</span>
         </div>
         <div class="primeiroQuadrado">
           <label for="" class="labelGeral">Last Name *</label><br>
           <input type="text" class="quadrado" id="inputUltimoNome">
-          <span class="checkboxError"></span>
+          <span class="checkboxError">This field is required</span>
         </div>
       </div>
       <div class="segundoQuadrante">
         <label for="" class="labelGeral">Email Address *</label><br>
         <input type="email" name="" id="campoEmail">
-        <span class="checkboxError"></span>
+        <span class="checkboxError">Please enter a valid email address</span>
       </div>
       <div class="terceiroQuadrante">
         <label for="" class="labelGeral">Query Type *</label>
         <div class="checkBox">
           <label for="general" class="checkboxOption">
-            <input type="radio" name="queryType" id="general" value="general">
+            <input type="radio" name="queryType" id="general" value="general" class="inputRadio">
             <span>General Enquiry</span>
           </label>
           <label for="support" class="checkboxOption">
-            <input type="radio" name="queryType" id="support" value="support" >
+            <input type="radio" name="queryType" id="support" value="support"  class="inputRadio">
             <span>Support Request</span>
           </label>
         </div>
-        <span class="checkboxError"></span>
+        <span class="checkboxError">Please select a query type</span>
       </div>
       <div class="quartoQuadrante">
         <label for="" class="labelGeral">Message *</label><br>
         <textarea rows="6" cols="40" id="campoTexto"></textarea>
-        <span class="checkboxError"></span>
+        <span class="checkboxError">This field is required</span>
       </div>
       
       <label for="" id="ultimoId">
-        <input type="checkbox" name="" id="checkInFinal"> 
-        <span>I consent to being contacted by the team *</span>
-        <span class="checkboxError"></span>
+        <div id="ultimoCheck">
+          <input type="checkbox" name="" id="checkInFinal"> 
+          <span>I consent to being contacted by the team *</span>
+        </div>
+        <span class="checkboxError">To submit this form, please consent to being contacted</span>
       </label><br>
       <button type="submit" id="botaoEnviar">Submit</button>
     </form>
     </div>
   </div>
  
-  
-  
   <footer class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="#">Vinicius Henrique</a>.
   </footer>
+  <script>
+    document.getElementById('cadastroForm').addEventListener('submit', (e) =>{
+      e.preventDefault()
+
+      let formValido = true
+
+      function mostrarErro(input, errorSpan) {
+      if (errorSpan) errorSpan.style.display = 'block';
+      if (input) input.style.borderColor = 'hsl(0, 66%, 54%)';
+    }
+
+      function limparErro(input, errorSpan) {
+      if (errorSpan) errorSpan.style.display = 'none';
+      if (input) input.style.borderColor = 'hsl(187, 24%, 22%)';
+    }
+
+    const primeiroNome = document.getElementById('inputPrimeiroNome');
+    const errorPrimeiroNome = primeiroNome.nextElementSibling;
+    if (primeiroNome.value.trim() === '') {
+      mostrarErro(primeiroNome, errorPrimeiroNome);
+      formValido = false;
+    } else {
+      limparErro(primeiroNome, errorPrimeiroNome);
+    }
+
+    const ultimoNome = document.getElementById('inputUltimoNome');
+    const errorUltimoNome = ultimoNome.nextElementSibling;
+    if (ultimoNome.value.trim() === '') {
+      mostrarErro(ultimoNome, errorUltimoNome);
+      formValido = false;
+    } else {
+      limparErro(ultimoNome, errorUltimoNome);
+    }
+
+    const email = document.getElementById('campoEmail');
+    const errorEmail = email.nextElementSibling;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) {
+      mostrarErro(email, errorEmail);
+      formValido = false;
+    } else {
+      limparErro(email, errorEmail);
+    }
+
+    const queryTypeSelected = document.querySelector('input[name="queryType"]:checked');
+    const errorQuery = document.querySelector('.terceiroQuadrante .checkboxError');
+    if (!queryTypeSelected) {
+      mostrarErro(null, errorQuery);
+      formValido = false;
+    } else {
+      limparErro(null, errorQuery);
+    }
+
+    const mensagem = document.getElementById('campoTexto');
+    const errorMensagem = mensagem.nextElementSibling;
+    if (mensagem.value.trim() === '') {
+      mostrarErro(mensagem, errorMensagem);
+      formValido = false;
+    } else {
+      limparErro(mensagem, errorMensagem);
+    }
+
+    const consent = document.getElementById('checkInFinal');
+    const errorConsent = document.querySelector('#ultimoId .checkboxError');
+    if (!consent.checked) {
+      mostrarErro(null, errorConsent);
+      formValido = false;
+    } else {
+      limparErro(null, errorConsent);
+    }
+
+    if (formValido) {
+      const successMsg = document.querySelector('.sucessMessage');
+      successMsg.style.display = 'block';
+      
+      this.reset();
+    }
+
+    })
+  </script>
 </body>
 </html>
